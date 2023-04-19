@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dulces Tulipanes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <link href="{% static 'css/menu.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/registerUser.css' %}" rel="stylesheet" id="bootstrap-css" />
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" id="bootstrap-css" />
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" id="bootstrap-css" />
+    <script src="{% static 'js/registerUser.js' %}"></script>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light"><img style="height: 100px; width: 100px;"
+                    src="{% static 'images/logo.jpeg' %}" id="icon" alt="Dulces Tulipanes" /></div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#"
+                    onclick="loadContentDiv('home')">Home</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"
+                    onclick="loadContentDiv('agregarProductos')">Agregar Productos</a>
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span
+                            class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi Perfil</a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#!" onclick="loadContentDiv('editarPerfil')">Editar
+                                        Perfil</a>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#!"
+                                    onclick="loadContentDiv('logout')">Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Page content-->
+            <div class="container-fluid" id="container">
+                <div>
+                    <h1 class="mt-4">Pasteleria Dulces Tulipanes</h1>
+                    <br>
+                    <p>Nuestra Pastelería tiene más de 30 años de tradición familiar y contamos con un gran equipo de
+                        trabajo que nos permite mantener nuestros procesos artesanales.
+
+                        <br>Hemos creado una gran variedad de productos basados en la calidad, innovación, presentación
+                        y el placer de disfrutar momentos especiales.
+
+                        <br>Descubre nuestras tortas, pasteles, postres, coctelería dulce y salada, entre otros.
+                    </p><br>
+                </div>
+                <div style="text-align: center; align-items: center; width: 80%;">
+                    <img style="align-items: center; width: 300px; height: 300px;" src="{% static 'images/torta.png' %}" id="icon"
+                        alt="Dulces Tulipanes" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Content home -->
+    <div class="container-fluid" style="visibility: hidden;" id="container-home">
+        <div>
+            <h1 class="mt-4">Pasteleria Dulces Tulipanes</h1>
+            <br>
+            <p>Nuestra Pastelería tiene más de 30 años de tradición familiar y contamos con un gran equipo de trabajo
+                que nos permite mantener nuestros procesos artesanales.
+
+                <br>Hemos creado una gran variedad de productos basados en la calidad, innovación, presentación y el
+                placer de disfrutar momentos especiales.
+
+                <br>Descubre nuestras tortas, pasteles, postres, coctelería dulce y salada, entre otros.
+            </p><br>
+        </div>
+        <div style="text-align: center; align-items: center; width: 80%;">
+            <img style="align-items: center; width: 300px; height: 300px;" src="{% static 'images/torta.png' %}" id="icon"
+                alt="Dulces Tulipanes" />
+        </div>
+    </div>
+    </div>
+
+    <!-- Content Productos -->
+    <div class="container-fluid" style="visibility: hidden;" id="container-agregarProductos">
+        <h1 class="fw-light">Dulces Tulipanes</h1>
+        <p class="lead text-body-secondary">Aqui podras encontrar nuestra seleccion de Tortas especialmente para ti.</p>
+        <div class="row" style="margin: auto; height: 100%; text-align:center"  >
+           <div class="col-lg-3 col-md-8" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
+                    <img src="{% static 'images/Img/Coctel/20210313_215942.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; height: 50%;" >
+                    <div class="card-body">
+                    <p class="card-text">Descripcion del producto aqui</p>
+                        <h4>
+                        Precio: $22.000
+                        </h4>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-3 col-md-8" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
+                <img src="{% static 'images/Img/Coctel/Tartaletas.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; height: 50%;" >
+                <div class="card-body">
+                <p class="card-text">Descripcion del producto aqui</p>
+                    <h4>
+                    Precio: $22.000
+                    </h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            <div class="col-lg-3 col-md-2" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
+                <img src="{% static 'images/Img/Pie de limon y tortas de yogurth/kuchen.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; height: 50%;">
+                <div class="card-body">
+                    <p class="card-text">Descripcion del producto aqui</p>
+                    <h4>
+                        Precio: $22.000
+                    </h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin: auto; height: 100%; text-align:center"  >
+            <div class="col-lg-3 col-md-3" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
+                     <img src="{% static 'images/Img/Coctel/20210313_215942.jpg' %}" heigt="20%" width ="80%" style="margin: 5px; " >
+                     <div class="card-body">
+                     <p class="card-text">Descripcion del producto aqui</p>
+                         <h4>
+                         Precio: $22.000
+                         </h4>
+                         <div class="d-flex justify-content-between align-items-center">
+                             <div class="btn-group">
+                                 <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
+                             </div>
+                         </div>
+                     </div>
+             </div>
+             <div class="col-lg-3 col-md-3" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
+                <img src="{% static 'images/Img/Pie de limon y tortas de yogurth/TortadeYogurth.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; " >
+                 <div class="card-body">
+                 <p class="card-text">Descripcion del producto aqui</p>
+                     <h4>
+                     Precio: $22.000
+                     </h4>
+                     <div class="d-flex justify-content-between align-items-center">
+                         <div class="btn-group">
+                             <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
+                         </div>
+                     </div>
+                 </div>
+         </div>
+             <div class="col-lg-3 col-md-2" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
+                 <img src="{% static 'images/Img/Pie de limon y tortas de yogurth/kuchen.jpg' %}" heigt="50%" width ="80%" style="margin: 5px;">
+                 <div class="card-body">
+                     <p class="card-text">Descripcion del producto aqui</p>
+                     <h4>
+                         Precio: $22.000
+                     </h4>
+                     <div class="d-flex justify-content-between align-items-center">
+                         <div class="btn-group">
+                             <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+    </div>
+
+
+        <!-- Content Editar Perfil -->
+        <!-- Content Editar Perfil -->
+        <div class="container-fluid" style="visibility: hidden" id="container-editarPerfil">
+            <div id="formContentRegister" style="width: 75%; margin-left: 10%;">
+                <div class="fadeIn first">
+                    <br />
+                    <span class="h4"> Editar usuario </span>
+                    <br />
+                    <br />
+                    <form class="was-validated register" action="http://127.0.0.1:8000/index/">
+                        {% csrf_token %}
+                        <div class="col-md">
+                            <div class="form-outline">
+                                <input type="text" id="nombre" class="fadeIn second corto" name="nombre"
+                                    value="{{ nombre|safe }}" placeholder="Nombre" required />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md">
+                            <div class="form-outline">
+                                <input type="text" id="apellido" class="fadeIn second corto" name="apellido"
+                                    value="{{ apellido|safe }}" placeholder="Apellido" required />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md">
+                            <div class="form-outline">
+                                <input type="text" id="direccion" class="fadeIn second mediano" name="direccion"
+                                    value="{{ direccion|safe }}" placeholder="Direccion" required />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md">
+                            <div class="form-outline">
+                                <input type="text" id="celular" class="fadeIn second corto" name="celular"
+                                    value="{{ numero_telefono|safe }}" placeholder="Numero de Telefono" required />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md">
+                            <div class="form-outline">
+                                <input type="text" id="email" class="fadeIn second corto" name="email"
+                                    placeholder="Email" value="{{ mail|safe }}" required />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md">
+                            <div class="form-outline">
+                                <input type="text" id="password-input" class="fadeIn second corto" name="password-input"
+                                    value="{{ contrasena|safe }}" placeholder="Contraseña" onclick="haveFocus()" onkeyup="validate()"
+                                    required />
+                                <div class="alert px-4 py-3 mb-0 d-none" role="alert" data-mdb-color="warning"
+                                    id="password-alert" style="width: 50%;">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="requirements leng" id="leng">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Password debe tener minimo 8 caracteres.
+                                        </li>
+                                        <li class="requirements big-letter" id="big-letter">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Password debe tener una may&uacute;scula.
+                                        </li>
+                                        <li class="requirements num" id="num">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Password debe tener un numero.
+                                        </li>
+                                        <li class="requirements special-char" id="special-char">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Password debe tener un caracter especial.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="numeroDocumento" name="numeroDocumento" value="{{ rut_usuario|safe }}" style="visibility: hidden;"/>
+                        <input type="button" class="fadeIn fourth" value="Continuar" onClick="updateData(event)" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/menuAdmin.js' %}"></script>
+</body>
+
+</html>
