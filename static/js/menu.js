@@ -1,3 +1,193 @@
+async function agregarTiempo() {
+  const config = {
+    headers: {
+      apikey: "f82779ddfbf8ccd5f1d48cc4986fd2d9",
+      "Access-Control-Allow-Origin": "*"
+    },
+  };
+  const url = `https://restcountries.com/v3.1/alpha/cl`;
+
+  await axios
+    .get(url, config)
+    .then((response) => {
+      console.log(response.data[0].name.common);
+      document.querySelector("#pais").innerHTML = response.data[0].name.common;
+    })
+    .catch((error) => {
+      document.querySelector("#pais").innerHTML = "";
+    });
+}
+
+agregarTiempo();
+
+const baseDeDatos = [
+  {
+    id: 1,
+    nombre: "Pie de Limon",
+    precio: 1200,
+    imagen: "/static/images/Img/Coctel/20210313_215942.jpg",
+  },
+  {
+    id: 2,
+    nombre: "Tartaleta",
+    precio: 1300,
+    imagen: "/static/images/Img/Coctel/Tartaletas.jpg",
+  },
+  {
+    id: 3,
+    nombre: "Torta Mil Hojas",
+    precio: 1500,
+    imagen: "/static/images/Img/Pie de limon y tortas de yogurth/kuchen.jpg",
+  },
+  {
+    id: 4,
+    nombre: "Cupcase",
+    precio: 2000,
+    imagen: "/static/images/Img/Coctel/20210313_215942.jpg",
+  },
+];
+
+let carrito = [];
+const divisa = "$";
+
+async function calcularTotalUSD(total) {
+  const config = {
+    headers: {
+      apikey: "4Rd57Kc3pmusk0ayOtBXCJeyDk25atUP",
+    },
+  };
+  const url = `https://api.apilayer.com/exchangerates_data/convert?to=USD&from=CLP&amount=${total}`;
+
+  if (total != 0) {
+    /*await axios
+      .get(url, config)
+      .then((response) => {
+        const dolar = response.data.result;
+        const dolarFormat = dolar.toString().replace(/\./g, ",");
+        document.querySelector("#totalUSD").innerHTML = dolarFormat;
+      })
+      .catch((error) => {
+        alert("Error convertidor CLP to Dolar");
+      });*/
+  } else {
+    document.querySelector("#totalUSD").innerHTML = 0;
+  }
+  //BORRAR ESTA LINEA
+  document.querySelector("#totalUSD").innerHTML = 0;
+}
+
+function calcularTotal() {
+  const total = carrito
+    .reduce((total, item) => {
+      const miItem = baseDeDatos.filter((itemBaseDatos) => {
+        return itemBaseDatos.id === parseInt(item);
+      });
+      return total + miItem[0].precio;
+    }, 0)
+    .toFixed(0);
+
+  calcularTotalUSD(total);
+  return total;
+}
+
+function vaciarCarrito() {
+  carrito = [];
+  renderizarCarrito();
+}
+
+function renderizarCarrito() {
+  document.querySelector("#carrito").innerHTML = "";
+
+  const carritoSinDuplicados = [...new Set(carrito)];
+  carritoSinDuplicados.forEach((item) => {
+    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+      return itemBaseDatos.id === parseInt(item);
+    });
+
+    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+      return itemId === item ? (total += 1) : total;
+    }, 0);
+
+    const miNodo = document.createElement("li");
+    miNodo.classList.add("list-group-item", "text-right", "mx-2");
+    miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${divisa}${miItem[0].precio}`;
+
+    const miBoton = document.createElement("button");
+    miBoton.classList.add("btn", "btn-danger", "mx-5");
+    miBoton.textContent = "X";
+    miBoton.style.marginLeft = "1rem";
+    miBoton.dataset.item = item;
+    miBoton.setAttribute("onclick", `borrarItemCarrito(${miItem[0].id})`);
+
+    miNodo.appendChild(miBoton);
+    document.querySelector("#carrito").appendChild(miNodo);
+  });
+
+  document.querySelector("#total").innerHTML = calcularTotal();
+}
+
+function borrarItemCarrito(id) {
+  carrito = carrito.filter((carritoId) => {
+    return carritoId !== id;
+  });
+
+  renderizarCarrito();
+}
+
+function anadirProductoAlCarrito(id) {
+  carrito.push(id);
+  renderizarCarrito();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  function renderizarProductos() {
+    baseDeDatos.forEach((info) => {
+      const miNodo = document.createElement("div");
+      miNodo.classList.add("card", "col-sm-4");
+
+      const miNodoCardBody = document.createElement("div");
+      miNodoCardBody.classList.add("card-body");
+
+      const miNodoTitle = document.createElement("h5");
+      miNodoTitle.classList.add("card-title");
+      miNodoTitle.textContent = info.nombre;
+
+      const miNodoImagen = document.createElement("img");
+      miNodoImagen.classList.add("img-fluid");
+      miNodoImagen.setAttribute("src", info.imagen);
+
+      const miNodoPrecio = document.createElement("p");
+      miNodoPrecio.classList.add("card-text");
+      miNodoPrecio.textContent = `${divisa}${info.precio}`;
+
+      const miNodoBoton = document.createElement("button");
+      miNodoBoton.classList.add("btn", "btn-primary");
+      miNodoBoton.textContent = "Agregar al Carro";
+      miNodoBoton.setAttribute("marcador", info.id);
+      miNodoBoton.setAttribute("id", info.id);
+      miNodoBoton.setAttribute(
+        "onclick",
+        `anadirProductoAlCarrito(${info.id})`
+      );
+
+      miNodoCardBody.appendChild(miNodoImagen);
+      miNodoCardBody.appendChild(miNodoTitle);
+      miNodoCardBody.appendChild(miNodoPrecio);
+      miNodoCardBody.appendChild(miNodoBoton);
+      miNodo.appendChild(miNodoCardBody);
+      document.querySelector("#items").appendChild(miNodo);
+    });
+  }
+
+  document
+    .querySelector("#boton-vaciar")
+    .setAttribute("onclick", `vaciarCarrito()`);
+
+  // Inicio
+  renderizarProductos();
+  renderizarCarrito();
+});
+
 function updateData(event) {
   event.preventDefault();
 

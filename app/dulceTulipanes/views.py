@@ -1,6 +1,4 @@
 from __future__ import print_function
-from json import JSONDecoder
-from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -32,7 +30,8 @@ class UsuariosDetails(APIView):
         password = request.data.get('password', '')
         usuario = Usuario.objects.filter(mail=email, contrasena=password).first()
         serializer = UsuarioSerializer(usuario)
-            
+        print("ACA")
+        print(usuario)
         if usuario:
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
