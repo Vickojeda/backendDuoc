@@ -9,6 +9,8 @@
     <meta name="author" content="" />
     <title>Dulces Tulipanes</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="{% static 'js/menu.js' %}"></script>
     <link href="{% static 'css/menu.css' %}" rel="stylesheet" />
     <link href="{% static 'css/registerUser.css' %}" rel="stylesheet" id="bootstrap-css" />
     <link href="{% static 'css/login.css' %}" rel="stylesheet" id="bootstrap-css" />
@@ -21,12 +23,13 @@
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light"><img style="height: 100px; width: 100px;"
-                    src="{% static 'images/logo.jpeg' %}" id="icon" alt="Dulces Tulipanes" /></div>
+                    src="{% static 'images/logo.jpeg' %}" id="icon" alt="Dulces Tulipanes" /><span id="pais"></span></div>
+                
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#"
                     onclick="loadContentDiv('home')">Inicio</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"
-                    onclick="loadContentDiv('ofertas')">Ofertas</a>
+                <!--<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"
+                    onclick="loadContentDiv('ofertas')">Ofertas</a>-->
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"
                     onclick="loadContentDiv('productos')">Productos</a>
             </div>
@@ -200,94 +203,23 @@
     <div class="container-fluid" style="visibility: hidden;" id="container-productos">
         <h1 class="fw-light">Dulces Tulipanes</h1>
         <p class="lead text-body-secondary">Aqui podras encontrar nuestra seleccion de Tortas especialmente para ti.</p>
-        <div class="row" style="margin: auto; height: 100%; text-align:center"  >
-           <div class="col-lg-3 col-md-8" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
-                    <img src="{% static 'images/Img/Coctel/20210313_215942.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; height: 50%;" >
-                    <div class="card-body">
-                    <p class="card-text">Descripcion del producto aqui</p>
-                        <h4>
-                        Precio: $22.000
-                        </h4>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-lg-3 col-md-8" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
-                <img src="{% static 'images/Img/Coctel/Tartaletas.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; height: 50%;" >
-                <div class="card-body">
-                <p class="card-text">Descripcion del producto aqui</p>
-                    <h4>
-                    Precio: $22.000
-                    </h4>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
-                        </div>
-                    </div>
-                </div>
-        </div>
-            <div class="col-lg-3 col-md-2" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
-                <img src="{% static 'images/Img/Pie de limon y tortas de yogurth/kuchen.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; height: 50%;">
-                <div class="card-body">
-                    <p class="card-text">Descripcion del producto aqui</p>
-                    <h4>
-                        Precio: $22.000
-                    </h4>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
-                        </div>
-                    </div>
-                </div>
+        <div class="container">
+            <div class="row">
+                <!-- Elementos generados a partir del JSON -->
+                <main id="items" class="col-sm-8 row"></main>
+                <!-- Carrito -->
+                <aside class="col-sm-4">
+                    <h2>Carrito</h2>
+                    <!-- Elementos del carrito -->
+                    <ul id="carrito" class="list-group"></ul>
+                    <hr>
+                    <!-- Precio total -->
+                    <p class="text-right">Total: $<span id="total"></span></p>
+                    <p class="text-right">Total USD: <span id="totalUSD">0</span>$</p>
+                    <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                </aside>
             </div>
         </div>
-        <div class="row" style="margin: auto; height: 100%; text-align:center"  >
-            <div class="col-lg-3 col-md-3" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
-                     <img src="{% static 'images/Img/Coctel/20210313_215942.jpg' %}" heigt="20%" width ="80%" style="margin: 5px; " >
-                     <div class="card-body">
-                     <p class="card-text">Descripcion del producto aqui</p>
-                         <h4>
-                         Precio: $22.000
-                         </h4>
-                         <div class="d-flex justify-content-between align-items-center">
-                             <div class="btn-group">
-                                 <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
-                             </div>
-                         </div>
-                     </div>
-             </div>
-             <div class="col-lg-3 col-md-3" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
-                <img src="{% static 'images/Img/Pie de limon y tortas de yogurth/TortadeYogurth.jpg' %}" heigt="50%" width ="80%" style="margin: 5px; " >
-                 <div class="card-body">
-                 <p class="card-text">Descripcion del producto aqui</p>
-                     <h4>
-                     Precio: $22.000
-                     </h4>
-                     <div class="d-flex justify-content-between align-items-center">
-                         <div class="btn-group">
-                             <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
-                         </div>
-                     </div>
-                 </div>
-         </div>
-             <div class="col-lg-3 col-md-2" style="height: 100%; width: 30%; border: steelblue solid 1px; margin:5px 10px;">
-                 <img src="{% static 'images/Img/Pie de limon y tortas de yogurth/kuchen.jpg' %}" heigt="50%" width ="80%" style="margin: 5px;">
-                 <div class="card-body">
-                     <p class="card-text">Descripcion del producto aqui</p>
-                     <h4>
-                         Precio: $22.000
-                     </h4>
-                     <div class="d-flex justify-content-between align-items-center">
-                         <div class="btn-group">
-                             <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al Carro</button>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
     </div>
 
 
@@ -387,8 +319,7 @@
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'js/menu.js' %}"></script>
+        
 </body>
 
 </html>

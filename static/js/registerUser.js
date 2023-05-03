@@ -12,7 +12,7 @@ function sendRegister(event) {
 
 
     if(nombre != "" && apellido != "" && direccion != "" && numeroDocumento != "" && celular != "" && email != "" && password != "") {
-        const url = "http://127.0.0.1:8000/api/usuarios/";
+        const url = "https://api-register-user.herokuapp.com/api/usuarios/";
 
         return axios.post(url, {
             nombre: nombre,
@@ -22,7 +22,8 @@ function sendRegister(event) {
             numero_telefono: celular,
             mail: email,
             contrasena: password,
-            id_rol: '2'
+            id_rol: '2',
+            token: 'f82779ddfbf8ccd5f1d48cc4986fd2d9',
           }).then(response => {
             window.location.replace("http://127.0.0.1:8000/index/");
           }).catch(error => {
