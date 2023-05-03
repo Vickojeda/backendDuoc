@@ -59,7 +59,7 @@ async function calcularTotalUSD(total) {
   const url = `https://api.apilayer.com/exchangerates_data/convert?to=USD&from=CLP&amount=${total}`;
 
   if (total != 0) {
-    /*await axios
+    await axios
       .get(url, config)
       .then((response) => {
         const dolar = response.data.result;
@@ -68,12 +68,10 @@ async function calcularTotalUSD(total) {
       })
       .catch((error) => {
         alert("Error convertidor CLP to Dolar");
-      });*/
+      });
   } else {
     document.querySelector("#totalUSD").innerHTML = 0;
   }
-  //BORRAR ESTA LINEA
-  document.querySelector("#totalUSD").innerHTML = 0;
 }
 
 function calcularTotal() {
