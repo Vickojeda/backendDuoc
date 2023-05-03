@@ -6,8 +6,6 @@ function auth(event) {
   var password = document.getElementById("password").value;
   const url = "https://apiloginserver.herokuapp.com/api/login/";
 
-  console.log("LALO");
-  console.log(url);
   return axios.post(url, {
     email: email, password: password, token: 'f82779ddfbf8ccd5f1d48cc4986fd2d9'
   }).then(response => {
